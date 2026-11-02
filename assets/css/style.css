@@ -1,0 +1,45 @@
+/* File: assets/css/style.css */
+
+/* Import Font Inter dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+/* Pengaturan Dasar */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #FFF0F5;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Kustomisasi Scrollbar agar lebih elegan */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF0F5; 
+}
+::-webkit-scrollbar-thumb {
+  background: #FDD4E6; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B01050; 
+}
+
+/* Utilitas tambahan untuk area baca artikel */
+.article-content p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+.article-content blockquote {
+  border-left: 4px solid #B01050;
+  padding-left: 1rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #B01050;
+  margin: 2rem 0;
+  background-color: rgba(253, 212, 230, 0.3);
+  padding: 1.5rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+}

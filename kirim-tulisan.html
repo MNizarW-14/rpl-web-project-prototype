@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirim Tulisan - Jurnalis Nuansa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-[#FFF0F5] text-[#000000]">
+
+  <!-- HEADER -->
+  <header class="bg-white border-b border-[#FDD4E6] sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-black tracking-tight text-[#000000] uppercase">
+        JURNALIS <span class="text-[#B01050]">NUANSA</span>
+      </a>
+      <a href="index.html" class="text-[#B01050] text-sm font-bold">← Kembali ke Beranda</a>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    
+    <div class="bg-white rounded-2xl shadow-lg border-2 border-[#FDD4E6] overflow-hidden flex flex-col md:flex-row">
+      
+      <!-- Bagian Info Kiri -->
+      <div class="bg-[#B01050] md:w-2/5 p-8 text-[#FFF0F5] flex flex-col justify-center">
+        <h2 class="text-2xl font-black mb-4">Mari Bersuara!</h2>
+        <p class="text-sm mb-6 leading-relaxed text-[#FDD4E6]">
+          Kami menerima kontribusi berupa Opini, Esai, Puisi, Cerpen, maupun Pers Rilis kegiatan organisasi mahasiswa.
+        </p>
+        <ul class="text-sm space-y-3 font-semibold">
+          <li class="flex items-start">
+            <span class="mr-2">✔️</span> Panjang tulisan opini idealnya 500 - 800 kata.
+          </li>
+          <li class="flex items-start">
+            <span class="mr-2">✔️</span> Tulisan adalah karya orisinal dan tidak mengandung unsur SARA.
+          </li>
+          <li class="flex items-start">
+            <span class="mr-2">✔️</span> Redaksi berhak menyunting judul dan isi tanpa mengubah makna.
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bagian Form Kanan -->
+      <div class="md:w-3/5 p-8">
+        <h3 class="text-xl font-black mb-6 border-b-2 border-[#FDD4E6] pb-2">Formulir Pengiriman Naskah</h3>
+        
+        <form action="#" method="POST" enctype="multipart/form-data" class="space-y-5">
+          <!-- Input Nama -->
+          <div>
+            <label class="block text-sm font-bold mb-1">Nama Lengkap / Nama Pena</label>
+            <input type="text" class="w-full border-2 border-[#FDD4E6] rounded-lg px-4 py-2 focus:outline-none focus:border-[#B01050] transition bg-[#FFF0F5]/50" placeholder="Masukkan nama Anda" required>
+          </div>
+
+          <!-- Input Prodi -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-bold mb-1">Program Studi</label>
+              <input type="text" class="w-full border-2 border-[#FDD4E6] rounded-lg px-4 py-2 focus:outline-none focus:border-[#B01050] transition bg-[#FFF0F5]/50" placeholder="Cth: Teknik Informatika" required>
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-1">Nomor Induk Mahasiswa</label>
+              <input type="text" class="w-full border-2 border-[#FDD4E6] rounded-lg px-4 py-2 focus:outline-none focus:border-[#B01050] transition bg-[#FFF0F5]/50" placeholder="NIM" required>
+            </div>
+          </div>
+
+          <!-- Kategori Tulisan -->
+          <div>
+            <label class="block text-sm font-bold mb-1">Kategori Tulisan</label>
+            <select class="w-full border-2 border-[#FDD4E6] rounded-lg px-4 py-2 focus:outline-none focus:border-[#B01050] transition bg-[#FFF0F5]/50">
+              <option>Opini / Esai</option>
+              <option>Sastra (Puisi / Cerpen)</option>
+              <option>Pers Rilis Kegiatan Ormawa</option>
+              <option>Resensi Buku / Film</option>
+            </select>
+          </div>
+
+          <!-- Upload File & Textarea -->
+          <div>
+            <label class="block text-sm font-bold mb-1">Judul Tulisan</label>
+            <input type="text" class="w-full border-2 border-[#FDD4E6] rounded-lg px-4 py-2 focus:outline-none focus:border-[#B01050] transition bg-[#FFF0F5]/50" placeholder="Ketik judul di sini" required>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold mb-1">Teks Singkat / Pengantar (Opsional)</label>
+            <textarea rows="3" class="w-full border-2 border-[#FDD4E6] rounded-lg px-4 py-2 focus:outline-none focus:border-[#B01050] transition bg-[#FFF0F5]/50" placeholder="Berikan pengantar singkat untuk redaksi..."></textarea>
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold mb-1">Unggah Dokumen Naskah (.doc, .docx)</label>
+            <input type="file" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-bold file:bg-[#FDD4E6] file:text-[#B01050] hover:file:bg-[#B01050] hover:file:text-[#FFF0F5] transition cursor-pointer" accept=".doc,.docx,.pdf" required>
+          </div>
+
+          <!-- Tombol Kirim -->
+          <button type="submit" class="w-full bg-[#B01050] hover:bg-[#8f0d41] text-[#FFF0F5] font-black text-lg py-3 rounded-lg shadow-md transition transform hover:-translate-y-0.5">
+            Kirim Naskah Sekarang
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
