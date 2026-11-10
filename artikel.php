@@ -11,22 +11,41 @@ if ($id === 0) {
     exit;
 }
 
-// Mengambil data artikel spesifik beserta kategorinya
-$sql = "SELECT articles.*, categories.name AS cat_name, categories.color_class 
+// Mengambil data artikel spesifik beserta kategorinya dan nama penulisnya
+$sql = "SELECT articles.*, categories.name AS cat_name, categories.color_class, users.name AS author_name 
         FROM articles 
         JOIN categories ON articles.category_id = categories.id 
-        WHERE articles.id = $id";
-$result = $conn->query($sql);
+        LEFT JOIN users ON articles.author_id = users.id 
+        WHERE articles.id = ? AND articles.status = 'terbit'";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
 
 // Jika ID artikel tidak ditemukan di database
 if ($result->num_rows === 0) {
-    die("<div style='text-align:center; padding:50px; font-family:sans-serif;'>
-            <h2>Artikel tidak ditemukan!</h2>
-            <a href='index.php'>Kembali ke Beranda</a>
-         </div>");
+    http_response_code(404);
+    include 'header.php';
+?>
+<main class="max-w-3xl mx-auto px-4 py-24 text-center">
+  <h2 class="text-3xl font-black text-[#000000]">Artikel tidak ditemukan!</h2>
+  <p class="text-sm text-[#000000]/60 mt-3 font-semibold">Artikel yang Anda cari tidak tersedia atau belum diterbitkan.</p>
+  <a href="index.php" class="inline-block mt-8 bg-[#B01050] hover:bg-[#8f0d41] text-[#FFF0F5] font-bold px-6 py-3 rounded-lg transition">
+    ← Kembali ke Beranda
+  </a>
+</main>
+<?php
+    include 'footer.php';
+    exit;
 }
 
 $article = $result->fetch_assoc();
+
+// Naikkan jumlah views setiap artikel dibuka
+$stmt_views = $conn->prepare("UPDATE articles SET views = views + 1 WHERE id = ?");
+$stmt_views->bind_param("i", $id);
+$stmt_views->execute();
+$stmt_views->close();
 
 // Memanggil Bagian Header
 include 'header.php';
@@ -38,22 +57,24 @@ include 'header.php';
   <!-- Header Artikel -->
   <div class="mb-8 text-center">
     <span class="bg-[#B01050] text-[#FFF0F5] text-xs font-bold uppercase px-3 py-1 rounded tracking-wider">
-      <?= $article['cat_name'] ?>
+      <?= e($article['cat_name']) ?>
     </span>
     <h1 class="text-3xl md:text-4xl font-black mt-5 leading-snug text-[#000000]">
-      <?= $article['title'] ?>
+      <?= e($article['title']) ?>
     </h1>
     <div class="flex items-center justify-center space-x-2 text-sm text-[#000000]/60 mt-4 font-semibold">
-      <span>Oleh <strong>Tim Redaksi</strong></span>
+      <span>Oleh <strong><?= e($article['author_name']) ?></strong></span>
       <span>•</span>
-      <span><?= date('d M Y', strtotime($article['published_at'])) ?></span>
+      <span><?= e(date('d M Y', strtotime($article['published_at']))) ?></span>
     </div>
   </div>
 
   <!-- Featured Image -->
   <div class="mb-10">
-    <img src="<?= $article['image_url'] ?>" alt="<?= $article['title'] ?>" class="w-full h-auto max-h-[450px] rounded-xl border-4 border-[#FDD4E6] shadow-md object-cover">
-    <p class="text-xs text-center text-[#000000]/50 mt-2">Ilustrasi berita. (Foto: Dok. Redaksi)</p>
+    <img src="<?= e($article['image_url']) ?>" alt="<?= e($article['title']) ?>" class="w-full h-auto max-h-[450px] rounded-xl border-4 border-[#FDD4E6] shadow-md object-cover">
+    <?php if (!empty($article['image_caption'])): ?>
+    <p class="text-xs text-center text-[#000000]/50 mt-2"><?= e($article['image_caption']) ?></p>
+    <?php endif; ?>
   </div>
 
   <!-- Isi Berita (Body Content) -->
